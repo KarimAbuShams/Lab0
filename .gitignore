@@ -1,0 +1,63 @@
+# --- Python ---
+# Bytecode compilado y cachés
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.mypy_cache/
+.pytest_cache/
+
+# --- Entornos Virtuales (Venv) ---
+# ¡Nunca subas tu entorno virtual!
+venv/
+env/
+.venv/
+*.egg-info/
+
+# --- Proyectos de ML / Datos (¡Importante!) ---
+# Puntos de control de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Archivos de Datos (Datasets)
+# Si tus datos son grandes o privados, crea una carpeta (ej. "data/")
+# y descomenta la línea de abajo. Es una mala práctica subir datasets a Git.
+# data/
+#
+# O ignora tipos de archivo específicos (ten cuidado con esto)
+# *.csv
+# *.json
+# *.parquet
+# *.db
+# *.sqlite3
+
+# Modelos Entrenados (¡Estos archivos suelen ser ENORMES!)
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.pth
+*.pt
+
+# --- Archivos de Configuración de IDE/Editor ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Archivos del Sistema Operativo ---
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+desktop.ini
+# Linux
+*~
+
+# --- Logs y Secretos ---
+# Archivos de logs
+*.log
+
+# Archivos de entorno (Contienen contraseñas, tokens, API keys)
+.env
+secrets.ini
+
