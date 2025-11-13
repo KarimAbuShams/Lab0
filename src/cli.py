@@ -123,8 +123,8 @@ def numeric():
 
 @numeric.command(help="Normaliza valores con min-max.")
 @click.argument("values", callback=str_to_float_list)
-@click.option("--min", "new_min", default=0.0, help="Nuevo mínimo (default 0.0).")
-@click.option("--max", "new_max", default=1.0, help="Nuevo máximo (default 1.0).")
+@click.option("--min", "new_min", default="0.0", type=float, help="Nuevo mínimo (default 0.0).")
+@click.option("--max", "new_max", default="1.0", type=float, help="Nuevo máximo (default 1.0).")
 def normalize(values, new_min, new_max):
     """
     Normaliza una lista de números al rango [min, max].
@@ -147,8 +147,8 @@ def standardize(values):
 
 @numeric.command(help="Recorta valores numéricos a un rango.")
 @click.argument("values", callback=str_to_float_list)
-@click.option("--min", "min_val", default=0.0, help="Valor mínimo (default 0.0).")
-@click.option("--max", "max_val", default=1.0, help="Valor máximo (default 1.0).")
+@click.option("--min", "min_val", default="0.0", type=float, help="Valor mínimo (default 0.0).")
+@click.option("--max", "max_val", default="1.0", type=float, help="Valor máximo (default 1.0).")
 def clip(values, min_val, max_val):
     """
     Recorta números a un rango [min, max].
@@ -156,8 +156,7 @@ def clip(values, min_val, max_val):
     """
     result = pp.clip_values(values, min_val=min_val, max_val=max_val)
     click.echo(result)
-
-
+    
 @numeric.command(help="Convierte lista de strings a enteros.")
 @click.argument("values", callback=str_to_list)
 def to_int(values):

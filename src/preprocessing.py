@@ -17,22 +17,24 @@ from typing import List, Any, Optional, Union
 
 def remove_missing(values: List[Any]) -> List[Any]:
     """
-    Elimina valores faltantes (None, "" y nan).
+    Elimina valores faltantes (None, "", "None", "nan", o float nan).
     Input: Lista de valores.
     Output: Lista sin valores faltantes.
     """
     result = []
     for v in values:
-        is_nan = False
-        try:
-            # math.isnan solo funciona con números
-            is_nan = math.isnan(float(v))
-        except (TypeError, ValueError):
-            pass  # El valor no es un número, por lo que no puede ser 'nan'
+        is_missing = False
+        if v is None or v == "":
+            is_missing = True
+        elif isinstance(v, str) and (v.lower() == 'none' or v.lower() == 'nan'):
+            is_missing = True
+        elif isinstance(v, (float, int)) and math.isnan(float(v)):
+            is_missing = True
 
-        if v is not None and v != "" and not is_nan:
+        if not is_missing:
             result.append(v)
     return result
+
 
 
 def fill_missing(values: List[Any], fill_value: Any = 0) -> List[Any]:
