@@ -14,6 +14,7 @@ from typing import List, Any, Optional, Union
 
 # --- Funciones de Limpieza ---
 
+
 def remove_missing(values: List[Any]) -> List[Any]:
     """
     Elimina valores faltantes (None, "" y nan).
@@ -75,6 +76,7 @@ def remove_duplicates(values: List[Any]) -> List[Any]:
 
 # --- Funciones Numéricas ---
 
+
 def normalize_min_max(
     values: List[float], new_min: float = 0.0, new_max: float = 1.0
 ) -> List[float]:
@@ -85,7 +87,7 @@ def normalize_min_max(
     """
     if not values:
         return []
-    
+
     old_min = min(values)
     old_max = max(values)
     old_range = old_max - old_min
@@ -94,7 +96,7 @@ def normalize_min_max(
     if old_range == 0:
         # Todos los valores son iguales
         return [new_min] * len(values)
-    
+
     return [(((v - old_min) * new_range) / old_range) + new_min for v in values]
 
 
@@ -115,13 +117,11 @@ def standardize_z_score(values: List[float]) -> List[float]:
     if std_dev == 0:
         # Todos los valores son iguales
         return [0.0] * n
-    
+
     return [(v - mean) / std_dev for v in values]
 
 
-def clip_values(
-    values: List[float], min_val: float, max_val: float
-) -> List[float]:
+def clip_values(values: List[float], min_val: float, max_val: float) -> List[float]:
     """
     Recorta valores numéricos a un rango [min_val, max_val].
     Input: Lista de números, valor mínimo, valor máximo.
@@ -162,13 +162,14 @@ def transform_log(values: List[Union[int, float]]) -> List[float]:
 
 # --- Funciones de Texto ---
 
+
 def tokenize(text: str) -> List[str]:
     """
     Tokeniza texto en palabras, seleccionando solo alfanuméricos y minúsculas.
     Input: Texto a procesar.
     Output: Lista de palabras (tokens).
     """
-    return re.findall(r'[a-zA-Z0-9]+', text.lower())
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
 
 
 def select_alphanumeric_spaces(text: str) -> str:
@@ -178,7 +179,7 @@ def select_alphanumeric_spaces(text: str) -> str:
     Output: Texto procesado.
     """
     # Esto es equivalente a "eliminar puntuación"
-    return re.sub(r'[^a-zA-Z0-9\s]', '', text)
+    return re.sub(r"[^a-zA-Z0-9\s]", "", text)
 
 
 def remove_stopwords(text: str, stopwords: List[str]) -> str:
@@ -190,10 +191,11 @@ def remove_stopwords(text: str, stopwords: List[str]) -> str:
     words = text.lower().split()
     stopwords_set = set(stopwords)
     filtered_words = [word for word in words if word not in stopwords_set]
-    return ' '.join(filtered_words)
+    return " ".join(filtered_words)
 
 
 # --- Funciones de Estructura ---
+
 
 def flatten_list(nested_list: List[List[Any]]) -> List[Any]:
     """
@@ -212,7 +214,7 @@ def shuffle_list(values: List[Any], seed: Optional[int] = None) -> List[Any]:
     """
     if seed is not None:
         random.seed(seed)
-    
+
     # Crear una copia para no modificar la lista original
     shuffled_values = values[:]
     random.shuffle(shuffled_values)
